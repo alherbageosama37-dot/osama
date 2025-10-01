@@ -49,7 +49,7 @@
     display: flex; 
 }
 
-/* تأثيرات الروابط المتحركة لسطح المكتب (ظهور متتالي) */
+/* تأثيرات الروابط المتحركة لسطح المكتب (ظهور متتالي وخط التحويم) */
 .main-nav ul li {
     margin-right: 25px;
     opacity: 0; 
@@ -67,7 +67,6 @@
     transition: color 0.3s, transform 0.2s ease-in-out; 
 }
 
-/* تأثير خط التحويم التدريجي */
 .main-nav ul li a::after {
     content: '';
     position: absolute;
@@ -129,21 +128,31 @@
         position: fixed; top: 80px; right: 0; width: 100%; height: calc(100vh - 80px); 
         background-color: #ffffff; z-index: 999;
         transform: translateX(100%); 
-        transition: transform 0.4s ease-in-out; /* انيميشن سحب النافذة */
+        transition: transform 0.4s ease-in-out 0.3s; /* تأخير سحب النافذة حتى تختفي الروابط */
     }
 
     /* 3. تنسيق الروابط داخل القائمة المنبثقة (لتحريكها) */
     .main-nav ul { flex-direction: column; padding: 40px 20px; text-align: center; }
     
     .main-nav ul li {
-        /* *** التعديل الذي يحل مشكلة الأنيميشن على الجوال *** */
+        /* *** الحالة الأولية: الإخفاء والانزلاق لليسار (قبل فتح القائمة) *** */
         opacity: 0; 
-        transform: translateX(20px); /* مسحوبة لليمين قليلاً */
+        transform: translateX(20px); 
         margin: 20px 0;
-        /* هذا هو المفتاح: Transition بدون تأخير ليتم تشغيله مباشرة عند فتح القائمة */
+        /* هذا هو المفتاح: تطبيق التأخير المعاكس هنا للإغلاق */
         transition: opacity 0.4s ease-out, transform 0.4s ease-out; 
     }
-    
+
+    /* 5. تدرج الإخفاء عند إغلاق القائمة (Reverse Staggered Effect) */
+    /* عند إغلاق القائمة (إزالة is-open)، يعود هذا التأثير ليعمل */
+    .main-nav ul li:nth-child(1) { transition-delay: 0.5s; }
+    .main-nav ul li:nth-child(2) { transition-delay: 0.4s; }
+    .main-nav ul li:nth-child(3) { transition-delay: 0.3s; }
+    .main-nav ul li:nth-child(4) { transition-delay: 0.2s; }
+    .main-nav ul li:nth-child(5) { transition-delay: 0.1s; }
+    /* ------------------------------------------------------------------ */
+
+
     .main-nav ul li a {
         font-size: 18px; border-bottom: 1px solid #eee; padding-bottom: 10px; display: block;
         transform: none !important;
@@ -152,6 +161,7 @@
     /* 4. تأثير ظهور الروابط عند فتح القائمة المنبثقة (Nav is-open) */
     .main-nav.is-open {
         transform: translateX(0); /* سحب النافذة للداخل */
+        transition-delay: 0s; /* إزالة تأخير النافذة عند الفتح لتظهر فوراً */
     }
 
     .main-nav.is-open ul li {
@@ -159,8 +169,8 @@
         transform: translateX(0); /* ظهور النص في مكانه الطبيعي */
     }
 
-    /* 5. تدرج ظهور الروابط داخل النافذة (Staggered Effect) */
-    /* *** التعديل الذي يحل مشكلة الأنيميشن: تطبيق التأخير فقط عند الفتح *** */
+    /* 5. تدرج ظهور الروابط داخل النافذة (Forward Staggered Effect) */
+    /* عند فتح القائمة، يلغي هذا التأثير التأثير السابق ويظهر الروابط بالترتيب */
     .main-nav.is-open ul li:nth-child(1) { transition-delay: 0.1s; }
     .main-nav.is-open ul li:nth-child(2) { transition-delay: 0.2s; }
     .main-nav.is-open ul li:nth-child(3) { transition-delay: 0.3s; }
