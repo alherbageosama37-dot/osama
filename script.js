@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('main-header');
     const navMenu = document.getElementById('main-nav');
     const menuToggle = document.getElementById('menu-toggle');
-    const navLinks = navMenu.querySelectorAll('a'); // الحصول على جميع الروابط
+    const navLinks = navMenu.querySelectorAll('a'); 
     let lastScrollY = window.scrollY; 
     const scrollThreshold = 80;
 
@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleMenu = () => {
         navMenu.classList.toggle('is-open');
         menuToggle.classList.toggle('is-active'); 
-        // منع التمرير في الخلفية
         document.body.classList.toggle('no-scroll', navMenu.classList.contains('is-open'));
     };
     
@@ -22,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             if (navMenu.classList.contains('is-open')) {
-                // تأخير بسيط للسماح بحدوث الانتقال قبل الإغلاق
                 setTimeout(toggleMenu, 100); 
             }
         });
@@ -57,13 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // الإخفاء عند النزول والتمرير بعيداً عن الأعلى
         if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
             header.classList.add('header-hidden');
-            header.classList.remove('header-shown'); // لإعادة ضبط حالة الروابط
+            header.classList.remove('header-shown'); 
         } 
         
         // الإظهار عند الصعود
         else if (currentScrollY < lastScrollY) {
             header.classList.remove('header-hidden');
-            header.classList.add('header-shown'); // لتشغيل أنيميشن الروابط
+            header.classList.add('header-shown'); 
         }
 
         lastScrollY = currentScrollY;
