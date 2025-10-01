@@ -6,7 +6,7 @@
     font-family: 'Arial', sans-serif;
 }
 
-/* تنسيق الحاوية */
+/* تنسيق الحاوية والهيدر... (لم يتغير) */
 .container {
     width: 90%;
     max-width: 1200px;
@@ -17,44 +17,39 @@
     height: 80px;
 }
 
-/* تنسيق الهيدر نفسه: أبيض، ثابت، وله ظل خفيف */
 #main-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #ffffff; /* الخلفية البيضاء */
+    background-color: #ffffff; 
     z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* الظل الخفيف */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
 }
 
-/* تنسيق اللوجو */
+/* أنيميشن اللوجو */
 .logo a {
     display: block;
-    transition: transform 0.3s ease-in-out; /* إضافة انتقال للشعار */
+    transition: transform 0.3s ease-in-out;
 }
 .logo img {
-    height: 50px; /* حجم اللوجو */
-
+    height: 50px; 
+    background-color: #3f51b5; 
     border-radius: 5px;
     display: block;
 }
-
-/* *** التعديل الجديد هنا: أنيميشن التحويم على اللوجو *** */
 .logo a:hover {
-    transform: scale(1.05); /* تكبير خفيف أو تحريك */
+    transform: scale(1.05); 
 }
 
 /* تنسيق قائمة التنقل (سطح المكتب) */
 .main-nav ul {
     list-style: none;
-    display: flex; /* لعرض الروابط أفقياً */
+    display: flex; 
 }
 
-/* ------------------------------------------------ */
 /* تأثيرات الروابط المتحركة لسطح المكتب (ظهور متتالي) */
-/* ------------------------------------------------ */
 .main-nav ul li {
     margin-right: 25px;
     opacity: 0; 
@@ -68,38 +63,33 @@
     font-size: 16px;
     padding: 10px 0;
     display: block;
-    position: relative; /* مهم لتموضع الخط السفلي */
+    position: relative; 
     transition: color 0.3s, transform 0.2s ease-in-out; 
 }
 
-/* *** التعديل الجديد هنا: تأثير خط التحويم التدريجي *** */
-
-/* إنشاء العنصر الزائف (الخط السفلي) */
+/* تأثير خط التحويم التدريجي */
 .main-nav ul li a::after {
     content: '';
     position: absolute;
-    right: 0; /* يبدأ من اليمين في تصميم RTL */
+    right: 0; 
     bottom: 0;
-    width: 0; /* يكون مخفياً في البداية */
+    width: 0; 
     height: 2px;
-    background-color: #3f51b5; /* لون الخط */
-    transition: width 0.3s ease-in-out; /* أنيميشن نمو الخط */
+    background-color: #3f51b5; 
+    transition: width 0.3s ease-in-out; 
 }
 
-/* تفعيل نمو الخط عند التحويم */
 .main-nav ul li a:hover::after {
     width: 100%;
     left: 0;
-    right: auto; /* ينمو من اليمين إلى اليسار */
+    right: auto; 
 }
-
-/* تأثير التحويل (Transform) عند التحويم */
 .main-nav ul li a:hover {
     color: #3f51b5;
     transform: translateY(-2px); 
 }
 
-/* تأثير ظهور الروابط (يُفعّل عند إضافة فئة header-shown بواسطة JS) */
+/* تأثير ظهور الروابط (سطح المكتب) */
 #main-header.header-shown .main-nav ul li {
     opacity: 1; 
     transform: translateY(0); 
@@ -113,42 +103,17 @@
 #main-header.header-shown .main-nav ul li:nth-child(5) { transition-delay: 0.5s; }
 
 
-/* ------------------------------------------------ */
-/* تنسيق زر القائمة (Hamburger Menu) */
-/* ------------------------------------------------ */
-.menu-toggle {
-    display: none; 
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1001;
-    position: relative;
-    width: 30px;
-    height: 30px;
-}
-
-.menu-toggle .bar {
-    display: block;
-    width: 100%;
-    height: 3px;
-    margin: 6px 0;
-    background-color: #333;
-    transition: all 0.3s ease-in-out;
-}
-
-/* تأثير إخفاء الهيدر (يتم إضافته بواسطة JavaScript) */
-.header-hidden {
-    transform: translateY(-100%); 
-    box-shadow: none;
-}
+/* زر القائمة وتأثير الإخفاء (لم يتغير) */
+.menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1001; position: relative; width: 30px; height: 30px; }
+.menu-toggle .bar { display: block; width: 100%; height: 3px; margin: 6px 0; background-color: #333; transition: all 0.3s ease-in-out; }
+.header-hidden { transform: translateY(-100%); box-shadow: none; }
 
 /* ------------------------------------------------ */
 /* استعلامات الوسائط (Media Queries) - شاشات الجوال */
 /* ------------------------------------------------ */
 @media (max-width: 768px) {
     
-    /* إلغاء تأثير الديسكتوب على الروابط في وضع الجوال */
+    /* إلغاء تأثير الديسكتوب على الروابط في وضع الجوال وإخفاء الخط */
     .main-nav ul li,
     #main-header.header-shown .main-nav ul li {
         opacity: 1;
@@ -156,63 +121,46 @@
         transition: none;
         transition-delay: 0s !important;
     }
-    
-    /* إخفاء تأثير الخط السفلي على الجوال */
-    .main-nav ul li a::after {
-        display: none;
-    }
+    .main-nav ul li a::after { display: none; }
+    .menu-toggle { display: block; } 
 
-    /* 1. إظهار زر القائمة في الجوال */
-    .menu-toggle {
-        display: block; 
-    }
-
-    /* 2. تنسيق القائمة المنبثقة (النافذة) للجوال */
+    /* تنسيق القائمة المنبثقة (النافذة) - انيميشن السحب */
     .main-nav {
-        position: fixed;
-        top: 80px; 
-        right: 0;
-        width: 100%;
-        height: calc(100vh - 80px); 
-        background-color: #ffffff; 
-        z-index: 999;
+        position: fixed; top: 80px; right: 0; width: 100%; height: calc(100vh - 80px); 
+        background-color: #ffffff; z-index: 999;
         transform: translateX(100%); 
-        transition: transform 0.4s ease-in-out; 
+        transition: transform 0.4s ease-in-out; /* انيميشن سحب النافذة */
     }
 
     /* 3. تنسيق الروابط داخل القائمة المنبثقة (لتحريكها) */
-    .main-nav ul {
-        flex-direction: column; 
-        padding: 40px 20px;
-        text-align: center;
-    }
+    .main-nav ul { flex-direction: column; padding: 40px 20px; text-align: center; }
     
     .main-nav ul li {
+        /* *** التعديل الذي يحل مشكلة الأنيميشن على الجوال *** */
         opacity: 0; 
-        transform: translateX(20px); 
+        transform: translateX(20px); /* مسحوبة لليمين قليلاً */
         margin: 20px 0;
+        /* هذا هو المفتاح: Transition بدون تأخير ليتم تشغيله مباشرة عند فتح القائمة */
         transition: opacity 0.4s ease-out, transform 0.4s ease-out; 
     }
     
     .main-nav ul li a {
-        font-size: 18px;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 10px;
-        display: block;
+        font-size: 18px; border-bottom: 1px solid #eee; padding-bottom: 10px; display: block;
         transform: none !important;
     }
 
     /* 4. تأثير ظهور الروابط عند فتح القائمة المنبثقة (Nav is-open) */
     .main-nav.is-open {
-        transform: translateX(0); 
+        transform: translateX(0); /* سحب النافذة للداخل */
     }
 
     .main-nav.is-open ul li {
         opacity: 1;
-        transform: translateX(0); 
+        transform: translateX(0); /* ظهور النص في مكانه الطبيعي */
     }
 
     /* 5. تدرج ظهور الروابط داخل النافذة (Staggered Effect) */
+    /* *** التعديل الذي يحل مشكلة الأنيميشن: تطبيق التأخير فقط عند الفتح *** */
     .main-nav.is-open ul li:nth-child(1) { transition-delay: 0.1s; }
     .main-nav.is-open ul li:nth-child(2) { transition-delay: 0.2s; }
     .main-nav.is-open ul li:nth-child(3) { transition-delay: 0.3s; }
